@@ -1,0 +1,28 @@
+name: Stock Bot Scheduler
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'      # Every Monday at 9 AM UTC
+    - cron: '0 9 1 * *'      # 1st of every month at 9 AM UTC
+  workflow_dispatch:          # Manual Run Button
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas numpy ta openpyxl
+
+      - name: Run bot
+        run: |
+          python stock_bot_excel.py
