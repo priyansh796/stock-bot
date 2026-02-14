@@ -25,4 +25,4 @@ jobs:
 
       - name: Run bot
         run: |
-          python stock_bot_excel.py
+          python stock_bot_monthly.py
